@@ -1,0 +1,205 @@
+@import 'react-phone-number-input/style.css';
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'react-toastify/dist/ReactToastify.css';
+@import 'react-loading-skeleton/dist/skeleton.css';
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* ------------------------- GLOBAL ------------------------- */
+a {
+  text-decoration: none;
+}
+
+.f-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.p-bold {
+  margin: 1rem;
+  color: rgba(0, 0, 0, 0.8);
+  font-weight: 500;
+}
+
+.on,
+.green {
+  font-size: 2em;
+  color: rgba(0, 128, 0, 0.836);
+  transform: all 0.5s;
+}
+
+.off,
+.red {
+  font-size: 2em;
+  color: rgba(226, 86, 43, 0.747);
+  transform: all 0.5s;
+}
+
+.red {
+  font-size: 1.2em;
+}
+
+/* ------------------------- MAP ------------------------- */
+.full-box {
+  height: 50vh;
+  max-width: initial;
+}
+
+/* ------------------------- TABLE ------------------------- */
+table.table {
+  margin-bottom: 0;
+}
+
+.table-title {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.table-bordered>:not(caption)>*>* {
+  border-width: 0 1px;
+}
+
+th,
+td {
+  vertical-align: middle !important;
+  white-space: nowrap;
+}
+
+.td-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  transition: all 0.5s !important;
+}
+
+.td-img:hover {
+  transform: scale(3);
+  transition: all 0.5s !important;
+}
+
+/* ------------------------- WRAPPER ------------------------- */
+.main-wrapper {
+  display: flex;
+  min-height: 100%;
+}
+
+.body-wrapper {
+  transition: margin-left .3s ease-in-out, width .3s ease-in-out !important;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  flex: 1;
+  transition: width .3s ease-in-out;
+}
+
+.body-wrapper.mini-body {
+  margin-left: 250px;
+}
+
+.body-wrapper.full-body {
+  margin-left: 4.6rem;
+}
+
+.sidebar-wrapper {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, .25), 0 10px 10px rgba(0, 0, 0, .22) !important;
+  background: linear-gradient(rgba(15, 145, 122, 1) 0%, rgba(131, 227, 124, 1) 75%);
+  z-index: 1038;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  transition: width .3s ease-in-out;
+}
+
+/* ------------------------ LOGIN SCREEN ------------------------- */
+.login-page {
+  background-color: #e9ecef;
+}
+
+.login-box {
+  width: 90%;
+}
+
+.login-logo {
+  font-size: 2.1rem;
+  font-weight: 300;
+  margin-bottom: 0.9rem;
+  text-align: center;
+}
+
+.login-logo a {
+  color: #495057;
+}
+
+@media (min-width: 576px) {
+  .login-box {
+    width: 360px;
+  }
+}
+
+/* ------------------------ HEADER ------------------------- */
+.header {
+  border-bottom: 1px solid #dee2e6;
+  z-index: 1020;
+  background: linear-gradient(120deg, rgba(15, 145, 122, 1) 0%, rgba(131, 227, 124, 1) 75%);
+}
+
+.dropdown-toggle:hover,
+.dropdown-toggle,
+.dropdown:hover {
+  background-color: transparent;
+  border: none;
+}
+
+.dropdown button {
+  background: transparent !important;
+}
+
+.right-profile-logo>img {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+}
+
+/* ------------------------ VIEW CARD ------------------------- */
+.card-title {
+  display: inline-block;
+}
+
+.card-tools {
+  float: right;
+  cursor: pointer;
+}
+
+/* ------------------------ INPUT PHONE NUMBER ------------------------- */
+.form-control.PhoneInput {
+  display: flex;
+}
+
+.form-control.PhoneInput .PhoneInputInput,
+.form-control.PhoneInput .PhoneInputInput:focus-visible {
+  border: none;
+  outline: none;
+}
+
+/* ------------------------ JODIT ------------------------- */
+.jodit-status-bar .jodit-status-bar__item.jodit-status-bar__item-right .jodit-status-bar-link,
+.jodit-add-new-line.jodit-add-new-line_after {
+  display: none;
+}
+
+/* ------------------------------------------------- */
