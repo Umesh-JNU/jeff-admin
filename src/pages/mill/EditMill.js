@@ -8,7 +8,7 @@ import { EditForm } from "../../components";
 export default function EditMillModel(props) {
   const { state } = useContext(Store);
   const { token } = state;
-  const { id } = useParams();  // mill/:id
+  const { id: millId } = useParams();  // mill/:id
 
   const [{ loading, error, loadingUpdate, mill, success }, dispatch] = useReducer(reducer, {
     loading: true,
@@ -17,7 +17,7 @@ export default function EditMillModel(props) {
   });
 
   const millData = {
-    mill_id: "",
+    id: "",
   };
   const millAttr = [
     {
@@ -25,7 +25,7 @@ export default function EditMillModel(props) {
       col: 12,
       props: {
         label: "Mill ID",
-        name: "mill_id",
+        name: "id",
         maxLength: 50,
         minLength: 4,
         required: true
@@ -35,15 +35,15 @@ export default function EditMillModel(props) {
   const [info, setInfo] = useState(millData);
 
   useEffect(() => {
-    if (mill && mill._id === id) {
+    if (mill && mill._id === millId) {
       console.log({ mill })
-      setInfo({ mill_id: mill.mill_id });
+      setInfo({ id: mill.id });
     }
 
     (async () => {
-      await getDetails(dispatch, token, id);
+      await getDetails(dispatch, token, millId);
     })();
-  }, [id, props.show]);
+  }, [millId, props.show]);
 
   const resetForm = () => {
     setInfo(millData);
@@ -52,7 +52,7 @@ export default function EditMillModel(props) {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    await update(dispatch, token, id, info);
+    await update(dispatch, token, millId, info);
     if (success) {
       resetForm();
     }

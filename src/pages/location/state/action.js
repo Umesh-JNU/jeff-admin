@@ -3,11 +3,11 @@ import axiosInstance from "../../../utils/axiosUtil";
 import { getError } from "../../../utils/error";
 
 export const create = async (dispatch, token, input) => {
-  console.log("category", { input })
+  console.log("location", { input })
   try {
     dispatch({ type: 'ADD_REQUEST' });
     const { data } = await axiosInstance.post(
-      "/api/admin/category/create", input,
+      "/api/location", input,
       { headers: { Authorization: token } }
     );
 
@@ -41,7 +41,7 @@ export const del = async (dispatch, token, id) => {
   ) {
     try {
       dispatch({ type: "FETCH_REQUEST" });
-      await axiosInstance.delete(`/api/admin/category/${id}`, {
+      await axiosInstance.delete(`/api/admin/location/${id}`, {
         headers: { Authorization: token },
       });
       dispatch({ type: "DELETE_SUCCESS", payload: id });
@@ -56,7 +56,7 @@ export const update = async (dispatch, token, id, info) => {
   try {
     dispatch({ type: "UPDATE_REQUEST" });
 
-    await axiosInstance.put(`/api/admin/category/${id}`, info, {
+    await axiosInstance.put(`/api/admin/location/${id}`, info, {
       headers: { Authorization: token },
     });
 

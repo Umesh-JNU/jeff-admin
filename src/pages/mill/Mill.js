@@ -96,7 +96,7 @@ export default function Mill() {
             mills.map((mill, i) => (
               <tr key={mill._id} className="odd">
                 <td className="text-center">{skip + i + 1}</td>
-                <td>{mill.mill_id}</td>
+                <td>{mill.id}</td>
                 <td>
                   <ViewButton
                     onClick={() => navigate(`/admin/view/mill/${mill._id}`)}

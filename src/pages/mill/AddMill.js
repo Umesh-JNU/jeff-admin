@@ -16,7 +16,7 @@ export default function AddMill() {
   });
 
   const millData = {
-    mill_id: "",
+    id: "",
   };
   const millAttr = [
     {
@@ -24,7 +24,7 @@ export default function AddMill() {
       col: 12,
       props: {
         label: "Mill ID",
-        name: "mill_id",
+        name: "id",
         maxLength: 50,
         minLength: 4,
         required: true

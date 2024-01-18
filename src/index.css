@@ -58,6 +58,54 @@ a {
   max-width: initial;
 }
 
+.map-input-box {
+  display: flex;
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  margin: 0.5rem auto;
+}
+
+.map-input-box input {
+  border-radius: 10px 0 0 10px;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  border-right: 0;
+  padding: 0.375rem 0.75rem;
+}
+
+.map-input-box input:focus-visible {
+  outline: none;
+}
+
+.pac-container {
+  z-index: 1055;
+}
+
+.map-input-box button {
+  border-radius: 0 10px 10px 0;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  border-left: 0;
+}
+
+@media (max-width: 400px) {
+  .map-input-box {
+    flex-wrap: wrap;
+    right: 3.5rem;
+  }
+
+  .map-input-box input {
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    margin-bottom: 0.5rem;
+    padding: 0.375rem 0.75rem;
+  }
+
+  .map-input-box button {
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+  }
+}
+
 /* ------------------------- TABLE ------------------------- */
 table.table {
   margin-bottom: 0;

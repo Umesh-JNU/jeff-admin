@@ -9,7 +9,7 @@ import { getDetails } from "./state/action";
 import EditMillModel from "./EditMill";
 
 const keyProps = {
-  "Mill ID": "mill_id", "Created At": "createdAt", "Last Update": "updatedAt"
+  "Mill ID": "id", "Created At": "createdAt", "Last Update": "updatedAt"
 };
 
 

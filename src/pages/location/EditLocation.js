@@ -67,7 +67,7 @@ export default function EditLocationModel(props) {
       setData={() => { }}
       inputFieldProps={[]}
       submitHandler={submitHandler}
-      target="/admin/location"
+      target="/admin/locations"
       successMessage="Location Updated Successfully! Redirecting..."
       reducerProps={{ loadingUpdate, error, success, dispatch }}
     >
@@ -80,16 +80,13 @@ export default function EditLocationModel(props) {
         }}
       >
         <MapScreen
-          setLat={(latitude) => {
-            setInfo({ ...info, lat: latitude });
-          }}
-          setLong={(longitude) => {
-            setInfo({ ...info, long: longitude });
-          }}
-          setAddr={(addr) => {
-            setInfo({ ...info, name: addr });
-          }}
-        ></MapScreen>
+          setLocation={(location, name) => setInfo({
+            lat: location.lat,
+            long: location.lng,
+            name
+          })}
+          currentLoc={{ lat: info?.lat, lng: info?.long }}
+        />
         {info && info.lat && info.long && info.name ? (
           <Row>
             <Col lg={3}>

@@ -7,10 +7,8 @@ import { create } from "./state/action";
 import { useTitle, AddForm, MapScreen } from "../../components";
 import { Col, Row } from "react-bootstrap";
 import { toastOptions } from "../../utils/error";
-import { useLocation } from "react-router-dom";
 
 export default function AddLocation() {
-  const location = useLocation();
   const { state } = useContext(Store);
   const { token } = state;
 
@@ -24,15 +22,6 @@ export default function AddLocation() {
     lat: "",
     long: ""
   };
-
-  useEffect(() => {
-    setInfo({
-      ...info,
-      lat: location.state && location.state.latitude,
-      long: location.state && location.state.longitude
-    });
-  }, []);
-
 
   const [info, setInfo] = useState(locationData);
 
@@ -72,16 +61,13 @@ export default function AddLocation() {
         }}
       >
         <MapScreen
-          setLat={(latitude) => {
-            setInfo({ ...info, lat: latitude });
-          }}
-          setLong={(longitude) => {
-            setInfo({ ...info, long: longitude });
-          }}
-          setAddr={(addr) => {
-            setInfo({ ...info, name: addr });
-          }}
-        ></MapScreen>
+          setLocation={(location, name) => setInfo({
+            lat: location.lat,
+            long: location.lng,
+            name
+          })}
+        />
+        {console.log("INFO", info)}
         {info && info.lat && info.long && info.name ? (
           <Row>
             <Col lg={3}>

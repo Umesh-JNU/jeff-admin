@@ -17,6 +17,7 @@ export default function MapScreen(props) {
   const { dispatch: ctxDispatch } = useContext(Store);
   const [center, setCenter] = useState(defaultLocation);
   const [location, setLocation] = useState(center);
+  const [locName, setLocName] = useState();
   const { search } = useLocation();
   const sp = new URLSearchParams(search);
 
@@ -41,13 +42,19 @@ export default function MapScreen(props) {
     }
   };
 
+  console.log({ center })
   useEffect(() => {
     getUserCurrentLocation();
 
-    ctxDispatch({
-      type: 'SET_FULLBOX_ON',
-    });
+    ctxDispatch({ type: 'SET_FULLBOX_ON' });
   }, [ctxDispatch]);
+
+  useEffect(() => {
+    if (props.currentLoc) {
+      setCenter(props.currentLoc);
+      setLocation(props.currentLoc);
+    }
+  }, [props.currentLoc])
 
   const onLoad = (map) => {
     mapRef.current = map;
@@ -61,13 +68,17 @@ export default function MapScreen(props) {
   };
 
   const onLoadPlaces = (place) => {
+    console.log({ place })
     placeRef.current = place;
   };
 
   const onPlacesChanged = () => {
-    const place = placeRef.current.getPlaces()[0].geometry.location;
-    setCenter({ lat: place.lat(), lng: place.lng() });
-    setLocation({ lat: place.lat(), lng: place.lng() });
+    console.log("PLACES", placeRef.current.getPlaces())
+    const place = placeRef.current.getPlaces()[0];
+    const loc = place.geometry.location;
+    setCenter({ lat: loc.lat(), lng: loc.lng() });
+    setLocation({ lat: loc.lat(), lng: loc.lng() });
+    setLocName(place.formatted_address);
   };
 
   const onMarkerLoad = (marker) => {
@@ -77,23 +88,31 @@ export default function MapScreen(props) {
   const onConfirm = () => {
     const places = placeRef.current.getPlaces() || [{}];
 
-    props.setLat(location.lat)
-    props.setLong(location.lng)
+    console.log({ location });
+    props.setLocation(location, locName);
+    // props.setLat(location.lat)
+    // props.setLong(location.lng)
+    // props.setAddr(locName);
 
     const getAddress = (lat, long, apiKey) => {
       fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=${apiKey}`).then(res => {
         return res.json();
-      }).then(({ results }) => { props.setAddr(results[0]?.formatted_address); })
+      }).then(results => {
+        console.log({ results });
+        // props.setAddr(results[0]?.formatted_address);
+      })
     }
 
-    getAddress(location.lat, location.lng, "AIzaSyDa1XtUxehWQu0ifml5AYWYs9a5iVp4AZA");
+    // getAddress(location.lat, location.lng, "AIzaSyB_I6ZXsXxpyAndkWBRWUJEMxsqKWVhGpo"); // sahil
+    getAddress(location.lat, location.lng, "AIzaSyDUrV14G1tu4GtcpMA6-ydY5ZL55j5_gLk");
 
     toast.success('location selected successfully.');
   };
 
   return (
     <div className="full-box">
-      <LoadScript libraries={libs} googleMapsApiKey="AIzaSyDa1XtUxehWQu0ifml5AYWYs9a5iVp4AZA">
+      {/* <LoadScript libraries={libs} googleMapsApiKey="AIzaSyB_I6ZXsXxpyAndkWBRWUJEMxsqKWVhGpo"> // sahil */}
+      <LoadScript libraries={libs} googleMapsApiKey="AIzaSyDUrV14G1tu4GtcpMA6-ydY5ZL55j5_gLk">
         <GoogleMap
           id="sample-map"
           mapContainerStyle={{ height: '100%', width: '100%' }}
