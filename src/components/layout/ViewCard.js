@@ -110,6 +110,7 @@ export default function ViewCard(props) {
             </div>}
           </Card.Header>
           <Card.Body>
+            {props.child}
             {isImage
               ?
               <Row>

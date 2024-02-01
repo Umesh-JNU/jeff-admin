@@ -41,7 +41,7 @@ const ContentCard = ({ content, url, text, onEdit, onDelete }) => {
           </Button>}
       </Card.Header>
       <Card.Body>
-        {content && <div dangerouslySetInnerHTML={{ __html: content }} />}
+        {content && <div style={{ maxHeight: '50vh', overflowY: 'auto' }} dangerouslySetInnerHTML={{ __html: content }} />}
       </Card.Body>
     </Card >
   )
@@ -101,7 +101,7 @@ export default function Content() {
             content={content?.pp}
             url="/admin/content/create/?TYPE=PP"
             text="Privacy Policy"
-            onEdit={() => navigate("/admin/content/edit/?TYPE=TC")}
+            onEdit={() => navigate("/admin/content/edit/?TYPE=PP")}
             onDelete={() => deleteContent({ pp: "" })}
           />
         </>

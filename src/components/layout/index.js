@@ -15,6 +15,7 @@ import SubmitButton from "./SubmitButton";
 import CountUp from "./CountUp";
 import UploadFileComp from "./UploadFileComp";
 import MapScreen from "./MapScreen";
+import LiveMap from "./LiveMap";
 
 export {
   useTitle,
@@ -37,4 +38,5 @@ export {
   CountUp,
   UploadFileComp,
   MapScreen,
+  LiveMap,
 };

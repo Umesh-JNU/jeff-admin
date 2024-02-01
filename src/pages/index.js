@@ -24,12 +24,17 @@ import Content from "./content/Content";
 import AddContent from "./content/AddContent";
 import EditContent from "./content/EditContent";
 
+import Trip from "./trip/Trip";
+import ViewTrip from "./trip/ViewTrip";
+import EditTrip from "./trip/EditTrip";
+
 export {
   Dashboard, Profile, AdminLoginScreen,
   Users, ViewUser,
   Location, ViewLocation, AddLocation,
   Truck, ViewTruck, AddTruck,
-  Mill, ViewMill, AddMill, 
+  Mill, ViewMill, AddMill,
   Message, ViewMessage,
-  Content, AddContent, EditContent
+  Content, AddContent, EditContent,
+  Trip, ViewTrip, EditTrip,
 };

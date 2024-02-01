@@ -9,8 +9,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Store } from '../../states/store';
 import Button from 'react-bootstrap/Button';
 import { toast } from 'react-toastify';
+import { toastOptions } from '../../utils/error';
 
-const defaultLocation = { lat: 45.516, lng: -73.56 };
+const defaultLocation = { lat: 20.796484, lng: 85.02297779999999 };
 const libs = ['places'];
 
 export default function MapScreen(props) {
@@ -86,26 +87,26 @@ export default function MapScreen(props) {
   };
 
   const onConfirm = () => {
-    const places = placeRef.current.getPlaces() || [{}];
+    if (!locName) {
+      const getAddress = (lat, long, apiKey) => {
+        fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=${apiKey}`).then(res => {
+          return res.json();
+        }).then(({ results }) => {
+          console.log({ results });
 
-    console.log({ location });
-    props.setLocation(location, locName);
-    // props.setLat(location.lat)
-    // props.setLong(location.lng)
-    // props.setAddr(locName);
+          setLocName(results[0]?.formatted_address);
+          props.setLocation(location, results[0]?.formatted_address);
+        })
+      }
 
-    const getAddress = (lat, long, apiKey) => {
-      fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=${apiKey}`).then(res => {
-        return res.json();
-      }).then(results => {
-        console.log({ results });
-        // props.setAddr(results[0]?.formatted_address);
-      })
+      // getAddress(location.lat, location.lng, "AIzaSyB_I6ZXsXxpyAndkWBRWUJEMxsqKWVhGpo"); // sahil
+      getAddress(location.lat, location.lng, "AIzaSyDUrV14G1tu4GtcpMA6-ydY5ZL55j5_gLk");
+
+    } else {
+      console.log({ location });
+      props.setLocation(location, locName);
     }
-
-    // getAddress(location.lat, location.lng, "AIzaSyB_I6ZXsXxpyAndkWBRWUJEMxsqKWVhGpo"); // sahil
-    getAddress(location.lat, location.lng, "AIzaSyDUrV14G1tu4GtcpMA6-ydY5ZL55j5_gLk");
-
+    const places = placeRef.current.getPlaces() || [{}];
     toast.success('location selected successfully.');
   };
 

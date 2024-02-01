@@ -6,7 +6,7 @@ import { ToastContainer } from "react-toastify";
 import { useTitle, ViewCard } from "../../components";
 import reducer from "./state/reducer";
 import { getDetails } from "./state/action";
-import EditLocationModel from "./EditLocation";
+// import EditLocationModel from "./EditLocation";
 
 const keyProps = {
   "Name": "name", "Latitude": "lat", "Longitude": "long", "Created At": "createdAt", "Last Update": "updatedAt"
@@ -38,13 +38,14 @@ const ViewLocation = () => {
       setModalShow={setModalShow}
       keyProps={keyProps}
       reducerProps={{ error, loading, dispatch }}
-    >
-      <EditLocationModel
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-      />
-      {!modalShow && <ToastContainer />}
-    </ViewCard>
+      isEdit={false}
+    />
+    //   <EditLocationModel
+    //     show={modalShow}
+    //     onHide={() => setModalShow(false)}
+    //   />
+    //   {!modalShow && <ToastContainer />}
+    // </ViewCard>
   );
 };
 

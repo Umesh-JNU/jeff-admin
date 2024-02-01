@@ -245,9 +245,149 @@ td {
 }
 
 /* ------------------------ JODIT ------------------------- */
+.jodit-workplace>div {
+  max-height: 40vh !important;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
 .jodit-status-bar .jodit-status-bar__item.jodit-status-bar__item-right .jodit-status-bar-link,
 .jodit-add-new-line.jodit-add-new-line_after {
   display: none;
 }
 
-/* ------------------------------------------------- */
+/* ---------------------------STEPS ---------------------- */
+/* Horizontal */
+.step {
+  width: 100%;
+}
+
+.step-md-item {
+  display: inline-block;
+  flex: 1;
+  overflow: visible;
+  position: relative;
+  vertical-align: top;
+}
+
+.step-md-item-border {
+  position: absolute;
+  top: -1px;
+  width: 100%;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-inline: calc(50%) 0;
+  padding: 0;
+}
+
+.step-md-item-border::after {
+  width: calc(100% - 24px);
+  height: 3px;
+  margin-inline-start: 12px;
+  display: inline-block;
+  background: var(--bs-secondary);
+  border-radius: 1px;
+  transition: background 0.3s;
+  content: "";
+}
+
+.step-md-item:last-child>.step-md-item-border {
+  display: none;
+}
+
+.step-md-item-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-inline-start: calc((100% - 8px) / 2);
+  padding-inline-end: 0;
+  line-height: 8px;
+  border: 0;
+  background-color: var(--bs-secondary);
+
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-inline-end: 8px;
+  font-size: 14px;
+  text-align: center;
+  border-radius: 32px;
+}
+
+.step-md-item-dot::after {
+  position: absolute;
+  top: -12px;
+  inset-inline-start: calc((8px - calc(40 * 1.5)) / 2);
+  width: calc(40px * 1.5);
+  height: 32px;
+  background: transparent;
+  content: "";
+}
+
+.step-md-item-content {
+  overflow: hidden;
+  text-align: center;
+}
+
+
+/* Vertical */
+.step-item {
+  position: relative;
+}
+
+.step-item-border {
+  position: absolute;
+  top: 12px;
+  padding: 16px 0 8px;
+  width: 1px;
+  height: 100%;
+}
+
+.step-item-border::after {
+  margin-inline-start: 3.5px;
+  width: 1px;
+  height: 100%;
+  display: inline-block;
+  width: 100%;
+  background: var(--bs-secondary);
+  border-radius: 1px;
+  transition: background 0.3s;
+  content: "";
+}
+
+.step-item:last-child>.step-item-border {
+  display: none;
+}
+
+.step-item-dot {
+  margin-top: 10px;
+  margin-inline-end: 16px;
+  float: left;
+  width: 8px;
+  height: 8px;
+  border-radius: 32px;
+  display: inline-block;
+  background-color: var(--bs-secondary);
+}
+
+.step-item-dot::after {
+  position: absolute;
+  top: -12px;
+  inset-inline-start: calc((8px - calc(40 * 1.5)) / 2);
+  width: calc(40px * 1.5);
+  height: 32px;
+  background: transparent;
+  content: "";
+}
+
+.step-item-content {
+  overflow: hidden;
+}
+
+[class^="step-"].active > [class$="dot"],
+[class^="step-"].active > [class$="border"]::after {
+  /* .step-md-item.active>.step-md-item-dot,
+.step-item.active>.step-item-dot,
+.step-item.active>.step-item-border::after,
+.step-md-item.active>.step-md-item-border::after { */
+  background: var(--bs-primary);
+}

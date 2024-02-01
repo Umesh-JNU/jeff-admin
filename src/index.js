@@ -7,13 +7,13 @@ import StoreProvider from "./states/store";
 import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
-  // <React.StrictMode>
+  <React.StrictMode>
     <BrowserRouter>
       <StoreProvider>
         <App />
       </StoreProvider>
-    </BrowserRouter>,
-  // </React.StrictMode>,
+    </BrowserRouter>
+   </React.StrictMode>,
   document.getElementById("root")
 );
 

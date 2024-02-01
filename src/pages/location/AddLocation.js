@@ -31,10 +31,9 @@ export default function AddLocation() {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    // if (!locationImage) {
-    //   toast.warning("Please select an image or wait till image is uploaded.", toastOptions);
-    //   return;
-    // }
+    if (!info.lat) {
+      return toast.error("Please select a location.", toastOptions);
+    }
 
     await create(dispatch, token, info);
     resetForm();
@@ -61,11 +60,14 @@ export default function AddLocation() {
         }}
       >
         <MapScreen
-          setLocation={(location, name) => setInfo({
-            lat: location.lat,
-            long: location.lng,
-            name
-          })}
+          setLocation={(location, name) => {
+            console.log({ location, name });
+            setInfo({
+              lat: location.lat,
+              long: location.lng,
+              name
+            })
+          }}
         />
         {console.log("INFO", info)}
         {info && info.lat && info.long && info.name ? (

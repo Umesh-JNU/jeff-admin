@@ -12,6 +12,7 @@ import {
   Mill, ViewMill, AddMill, 
   Message, ViewMessage,
   Content, AddContent, EditContent,
+  Trip, ViewTrip,
 } from "./pages";
 
 function App() {
@@ -37,7 +38,8 @@ function App() {
     { path: "/admin/mills", element: <Mill /> },
     { path: "/admin/mill/create", element: <AddMill /> },
     { path: "/admin/view/mill/:id", element: <ViewMill /> },
-    { path: "/admin/trips", element: <></> },
+    { path: "/admin/trips", element: <Trip /> },
+    { path: "/admin/view/trip/:id", element: <ViewTrip /> },
     { path: "/admin/messages", element: <Message/> },
     { path: "/admin/view/message/:id", element: <ViewMessage/> },
     { path: "/admin/contents", element: <Content /> },

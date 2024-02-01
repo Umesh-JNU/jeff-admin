@@ -19,6 +19,7 @@ import {
   CountUp,
   UploadFileComp,
   MapScreen,
+  LiveMap,
 } from "./layout";
 
 import ArrayView from "./listView/ArrayView";
@@ -47,4 +48,5 @@ export {
   CountUp,
   UploadFileComp,
   MapScreen,
+  LiveMap
 };

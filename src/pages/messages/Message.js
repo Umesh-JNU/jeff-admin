@@ -60,7 +60,7 @@ export default function Message() {
 
   const numOfPages = Math.ceil(messageCount / resultPerPage);
   const skip = resultPerPage * (curPage - 1);
-  // console.log("nuofPage", numOfPages, resultPerPage);
+  console.log("nuofPage", numOfPages, resultPerPage, messageCount);
 
   const column = [
     "S.No",
@@ -90,8 +90,8 @@ export default function Message() {
           //   createURL: "/admin/message/create",
           //   text: "message"
           // }}
-        isTitle="true"
-        title="Messages"
+          isTitle="true"
+          title="Messages"
         >
           {messages && messages.length > 0 &&
             messages.map((message, i) => (

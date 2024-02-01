@@ -59,7 +59,7 @@ export default function CustomTable(props) {
               value={searchInput}
               onChange={(e) => {
                 setSearchInput(e.target.value);
-                setQuery(e.target.value)
+                // setQuery(e.target.value)
               }}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {

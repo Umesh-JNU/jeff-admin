@@ -42,6 +42,13 @@ export default function EditContent() {
     }
   }, [content]);
 
+  useEffect(() => {
+    if (editor.current) {
+      const domScroll = document.querySelector(".jodit-workplace>div");
+      domScroll.scrollTop = domScroll.scrollHeight;
+    }
+  }, [value]);
+
   const resetForm = () => setValue("");
 
   const submitHandler = async (e) => {
