@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react'
-import Skeleton from 'react-loading-skeleton';
-import { Card, Col, Row } from 'react-bootstrap'
-import { FaEdit, FaCheck } from 'react-icons/fa';
+import React, { useEffect } from "react";
+import Skeleton from "react-loading-skeleton";
+import { Card, Col, Row } from "react-bootstrap";
+import { FaEdit, FaCheck } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
-import { ToastContainer, toast } from 'react-toastify';
-import { clearErrors } from '../../states/actions';
-import { getDateTime } from '../../utils/function';
-import { toastOptions } from '../../utils/error';
-import MotionDiv from './MotionDiv';
-import MessageBox from './MessageBox';
+import { ToastContainer, toast } from "react-toastify";
+import { clearErrors } from "../../states/actions";
+import { getDateTime } from "../../utils/function";
+import { toastOptions } from "../../utils/error";
+import MotionDiv from "./MotionDiv";
+import MessageBox from "./MessageBox";
 
 /**
  * Renders a card component to display details with optional loading state and edit functionality.
@@ -42,18 +42,24 @@ import MessageBox from './MessageBox';
 
 const boolComp = (val) => {
   return val ? <FaCheck className="green" /> : <ImCross className="red" />;
-}
+};
 
 const isDate = (date) => {
-  return ((date instanceof Date) && new Date(date) !== "Invalid Date") && !isNaN(new Date(date));
-}
+  return (
+    date instanceof Date &&
+    new Date(date) !== "Invalid Date" &&
+    !isNaN(new Date(date))
+  );
+};
 
 const dynamicComp = (val) => {
   const dataType = typeof val;
   // console.log({ dataType })
   switch (dataType) {
-    case "number": return val;
-    case "boolean": return boolComp(val);
+    case "number":
+      return val;
+    case "boolean":
+      return boolComp(val);
     default:
       // console.log({ val });
       const res = val ? (isDate(val) ? getDateTime(val) : val) : "---";
@@ -63,7 +69,7 @@ const dynamicComp = (val) => {
 };
 
 export default function ViewCard(props) {
-  console.log("inveiw", { props })
+  console.log("inveiw", { props });
   const {
     setModalShow,
     data,
@@ -73,7 +79,7 @@ export default function ViewCard(props) {
     image_url,
     successMsg,
     reducerProps,
-    isEdit = true
+    isEdit = true,
   } = props;
 
   const { loading, error, dispatch, success } = reducerProps;
@@ -98,67 +104,84 @@ export default function ViewCard(props) {
       ) : (
         <Card>
           <Card.Header>
-            {title
-              ? <Card.Title>{title}</Card.Title>
-              : <Skeleton count={1} height={35} width={200} baseColor='#afafaf' />
-            }
-            {isEdit && <div className="card-tools">
-              <FaEdit
-                style={{ color: "blue" }}
-                onClick={() => setModalShow(true)}
-              />
-            </div>}
+            {title ? (
+              <Card.Title>{title}</Card.Title>
+            ) : (
+              <Skeleton count={1} height={35} width={200} baseColor="#afafaf" />
+            )}
+            {isEdit && (
+              <div className="card-tools">
+                <FaEdit
+                  style={{ color: "blue" }}
+                  onClick={() => setModalShow(true)}
+                />
+              </div>
+            )}
           </Card.Header>
           <Card.Body>
             {props.child}
-            {isImage
-              ?
+            {isImage ? (
               <Row>
                 <Col md={4}>
-                  {loading ? <Skeleton height={200} /> :
+                  {loading ? (
+                    <Skeleton height={200} />
+                  ) : (
                     <img
                       className="img-fluid"
                       src={image_url}
                       alt=""
                       width={"200px"}
                       height={"200px"}
-                    />}
+                    />
+                  )}
                 </Col>
                 <Col>
                   <Row>
-                    {fields && fields.map(([k, attr]) => {
-                      // console.log({ k, attr })
-                      return (
-                        <Col key={k} md={4}>
-                          <p className="mb-0">
-                            <strong>{k}</strong>
-                          </p>
-                          <p>{loading ? <Skeleton /> : dynamicComp(data[attr]) === 'CA' ? 'Canada' : dynamicComp(data[attr])}</p>
-                        </Col>
-                      )
-                    })}
+                    {fields &&
+                      fields.map(([k, attr]) => {
+                        // console.log({ k, attr })
+                        return (
+                          <Col key={k} md={4}>
+                            <p className="mb-0">
+                              <strong>{k}</strong>
+                            </p>
+                            <p>
+                              {loading ? (
+                                <Skeleton />
+                              ) : dynamicComp(data[attr]) === "CA" ? (
+                                "Canada"
+                              ) : (
+                                dynamicComp(data[attr])
+                              )}
+                            </p>
+                          </Col>
+                        );
+                      })}
                   </Row>
                 </Col>
               </Row>
-              :
+            ) : (
               <Row>
-                {fields && fields.map(([k, attr]) => {
-                  // console.log({ k, attr })
-                  return (
-                    <Col key={k} md={4}>
-                      <p className="mb-0">
-                        <strong>{k}</strong>
-                      </p>
-                      <p>{loading ? <Skeleton /> : dynamicComp(data[attr])}</p>
-                    </Col>
-                  )
-                })}
+                {fields &&
+                  fields.map(([k, attr]) => {
+                    // console.log({ k, attr })
+                    return (
+                      <Col key={k} md={4}>
+                        <p className="mb-0">
+                          <strong>{k}</strong>
+                        </p>
+                        <p>
+                          {loading ? <Skeleton /> : dynamicComp(data[attr])}
+                        </p>
+                      </Col>
+                    );
+                  })}
               </Row>
-            }
+            )}
             {props.children}
           </Card.Body>
         </Card>
       )}
     </MotionDiv>
-  )
+  );
 }

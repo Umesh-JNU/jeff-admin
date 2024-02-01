@@ -9,9 +9,11 @@ import { getDetails } from "./state/action";
 import EditMillModel from "./EditMill";
 
 const keyProps = {
-  "Mill ID": "id", "Created At": "createdAt", "Last Update": "updatedAt"
+  Name: "mill_name",
+  Address: "address",
+  "Created At": "createdAt",
+  "Last Update": "updatedAt",
 };
-
 
 const ViewMill = () => {
   const { state } = useContext(Store);
@@ -24,7 +26,7 @@ const ViewMill = () => {
     error: "",
   });
 
-  console.log({ error, mill })
+  console.log({ error, mill });
   useEffect(() => {
     (async () => {
       await getDetails(dispatch, token, id);
@@ -35,15 +37,13 @@ const ViewMill = () => {
   return (
     <ViewCard
       title={"Mill Details"}
-      data={mill}
+      data={mill && { ...mill, address: mill.address?.name }}
       setModalShow={setModalShow}
       keyProps={keyProps}
       reducerProps={{ error, loading, dispatch }}
+      isEdit={false}
     >
-      <EditMillModel
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-      />
+      <EditMillModel show={modalShow} onHide={() => setModalShow(false)} />
       {!modalShow && <ToastContainer />}
     </ViewCard>
   );
