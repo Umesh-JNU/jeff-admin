@@ -5,6 +5,8 @@ import { ToastContainer, toast } from "react-toastify";
 import reducer from "./state/reducer";
 import { create } from "./state/action";
 import { useTitle, AddForm } from "../../components";
+import { Row, Col } from "react-bootstrap";
+import MapScreen from "./../../components/layout/MapScreen";
 
 export default function AddMill() {
   const { state } = useContext(Store);
@@ -16,20 +18,23 @@ export default function AddMill() {
   });
 
   const millData = {
-    id: "",
+    mill_name: "",
+    name: "",
+    lat: "",
+    long: "",
   };
   const millAttr = [
     {
       type: "text",
       col: 12,
       props: {
-        label: "Mill ID",
-        name: "id",
+        label: "Name",
+        name: "mill_name",
         maxLength: 50,
         minLength: 4,
-        required: true
-      }
-    }
+        required: true,
+      },
+    },
   ];
   const [info, setInfo] = useState(millData);
 
@@ -43,7 +48,6 @@ export default function AddMill() {
     await create(dispatch, token, info);
     resetForm();
   };
-
   useTitle("Create Mill");
   return (
     <AddForm
@@ -56,6 +60,46 @@ export default function AddMill() {
       successMessage="Mill Created Successfully!"
       reducerProps={{ loading, error, success, dispatch }}
     >
+      <h6>Select Address</h6>
+      <div
+        className="mb-3"
+        style={{
+          border: "1px solid #ced4da",
+          borderRadius: "0.25rem",
+        }}
+      >
+        <MapScreen
+          setLocation={(location, name) => {
+            console.log({ location, name });
+            setInfo((prev) => {
+              return {
+                ...prev,
+                name,
+                lat: location.lat,
+                long: location.lng,
+              };
+            });
+          }}
+        />
+        {console.log("INFO", info)}
+        {info && info.lat && info.long && info.name ? (
+          <Row>
+            <Col lg={3}>
+              <p className="p-bold">LAT: {info.lat}</p>
+            </Col>
+            <Col lg={3}>
+              <p className="p-bold">LNG: {info.long}</p>
+            </Col>
+            <Col lg={6}>
+              <p className="p-bold">Address: {info.name}</p>
+            </Col>
+          </Row>
+        ) : (
+          <div>
+            <p className="p-bold">No Address</p>
+          </div>
+        )}
+      </div>
       <ToastContainer />
     </AddForm>
   );

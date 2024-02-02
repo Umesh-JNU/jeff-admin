@@ -1,4 +1,3 @@
-
 import React, { useContext, useEffect, useReducer, useState } from "react";
 import { Store } from "../../states/store";
 import { clearErrors, clearSuccess } from "../../states/actions";
@@ -29,11 +28,13 @@ export default function Mill() {
 
   const curPageHandler = (p) => setCurPage(p);
 
-  const [{ loading, error, mills, millCount, success }, dispatch] =
-    useReducer(reducer, {
+  const [{ loading, error, mills, millCount, success }, dispatch] = useReducer(
+    reducer,
+    {
       loading: true,
       error: "",
-    });
+    }
+  );
 
   const deleteMill = async (id) => {
     await del(dispatch, token, id);
@@ -41,8 +42,8 @@ export default function Mill() {
 
   useEffect(() => {
     const fetchData = async () => {
-      await getAll(dispatch, token, curPage, resultPerPage, query)
-    }
+      await getAll(dispatch, token, curPage, resultPerPage, query);
+    };
     fetchData();
   }, [token, curPage, resultPerPage, query]);
 
@@ -62,12 +63,8 @@ export default function Mill() {
   const skip = resultPerPage * (curPage - 1);
   // console.log("nuofPage", numOfPages, resultPerPage);
 
-  const column = [
-    "S.No",
-    "Mill ID",
-    "Actions",
-  ];
-
+  const column = ["S.No", "Name", "Address", "Actions"];
+  console.log(mills);
   useTitle("Mills");
   return (
     <MotionDiv>
@@ -87,16 +84,18 @@ export default function Mill() {
           isCreateBtn="true"
           createBtnProps={{
             createURL: "/admin/mill/create",
-            text: "Mill"
+            text: "Mill",
           }}
-        // isTitle="true"
-        // title="Users"
+          // isTitle="true"
+          // title="Users"
         >
-          {mills && mills.length > 0 &&
+          {mills &&
+            mills.length > 0 &&
             mills.map((mill, i) => (
               <tr key={mill._id} className="odd">
                 <td className="text-center">{skip + i + 1}</td>
-                <td>{mill.id}</td>
+                <td>{mill.mill_name}</td>
+                <td>{mill.address?.name}</td>
                 <td>
                   <ViewButton
                     onClick={() => navigate(`/admin/view/mill/${mill._id}`)}
