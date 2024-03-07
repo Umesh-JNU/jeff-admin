@@ -10,14 +10,15 @@ import {
   useTitle,
   MotionDiv,
   CustomTable,
+  ArrayView,
   ViewButton,
   DeleteButton,
-  SelectInput,
 } from "../../components";
 import reducer from "./state/reducer";
 import { getAll, del } from "./state/action";
 import { toastOptions } from "../../utils/error";
-import { Col, Form, Row } from "react-bootstrap";
+import { IoMdOpen } from "react-icons/io";
+import { Col, Row } from "react-bootstrap";
 
 export default function Trips() {
   const navigate = useNavigate();
@@ -38,6 +39,19 @@ export default function Trips() {
       error: "",
     });
   console.log({ trips })
+
+  const [modalShow, setModalShow] = useState(false);
+  const [milageList, setMilageList] = useState([]);
+  const showModelHandler = ({ start_milage = '---', load_milage = '---', unload_milage = '---', end_milage = '---' }) => {
+    setMilageList([
+      { a: "Start Milage", b: start_milage },
+      { a: "Load Milage", b: load_milage },
+      { a: "Unload Milage", b: unload_milage },
+      { a: "End Milage", b: end_milage },
+    ]);
+    setModalShow(true);
+  }
+
   const deleteTrip = async (id) => {
     await del(dispatch, token, id);
   };
@@ -62,9 +76,11 @@ export default function Trips() {
 
   const column = [
     "S.No",
-    "Source",
-    "Destination",
-    "Driver",
+    "Start Loc.",
+    "Load Loc.",
+    "Unload Loc.",
+    "End Loc.",
+    "Milage",
     "Truck ID",
     "Actions",
   ];
@@ -129,10 +145,17 @@ export default function Trips() {
               trips.map((trip, i) => (
                 <tr key={trip._id} className="odd">
                   <td className="text-center">{skip + i + 1}</td>
-                  <td>{trip.sub_trip?.source ? trip.sub_trip.source.name : trip.source.name}</td>
-                  <td>{trip.sub_trip?.dest ? trip.sub_trip.dest.name : trip.dest.name}</td>
-                  <td>{trip.driver_name}</td>
-                  <td>{trip.truck.truck_id}</td>
+                  <td>{trip.source_loc?.name}</td>
+                  <td>{trip.load_loc?.name}</td>
+                  <td>{trip.unload_loc?.address?.name ? trip.unload_loc.address.name : '---'}</td>
+                  <td>{trip.end_loc ? trip.end_loc.name : '---'}</td>
+                  <td>
+                    <IoMdOpen
+                      className="open-model"
+                      onClick={() => showModelHandler(trip)}
+                    />
+                  </td>
+                  <td>{trip.truck?.truck_id}</td>
                   <td>
                     <ViewButton onClick={() => navigate(`/admin/view/trip/${trip._id}`)} />
                     <DeleteButton onClick={() => deleteTrip(trip._id)} />
@@ -141,8 +164,18 @@ export default function Trips() {
               ))}
           </CustomTable>
         </>
-      )
-      }
+      )}
+      {milageList && modalShow ? (
+        <ArrayView
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+          arr={milageList}
+          column={{ "Milage": "a", "Value": "b" }}
+          title="Milages"
+        />
+      ) : (
+        <></>
+      )}
       <ToastContainer />
     </MotionDiv >
   );

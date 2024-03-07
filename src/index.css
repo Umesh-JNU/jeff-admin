@@ -52,6 +52,12 @@ a {
   font-size: 1.2em;
 }
 
+.open-model {
+  font-size: 2em;
+  color: blue;
+  cursor: pointer;
+}
+
 /* ------------------------- MAP ------------------------- */
 .full-box {
   height: 50vh;
@@ -383,8 +389,8 @@ td {
   overflow: hidden;
 }
 
-[class^="step-"].active > [class$="dot"],
-[class^="step-"].active > [class$="border"]::after {
+[class^="step-"].active>[class$="dot"],
+[class^="step-"].active>[class$="border"]::after {
   /* .step-md-item.active>.step-md-item-dot,
 .step-item.active>.step-item-dot,
 .step-item.active>.step-item-border::after,
