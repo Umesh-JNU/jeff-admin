@@ -4,7 +4,7 @@ import { Store } from "../../states/store";
 import { Link, useNavigate } from "react-router-dom";
 
 import { BiTrip } from "react-icons/bi";
-import { IoLocation } from "react-icons/io5";
+import { IoLocation, IoTimer } from "react-icons/io5";
 import { RiDashboard2Fill } from "react-icons/ri";
 import { FaSignOutAlt, FaTruck } from "react-icons/fa";
 import { BiMessageDetail, BiSolidBookContent } from "react-icons/bi";
@@ -19,6 +19,7 @@ const linkList = [
   { icon: <BiMessageDetail className="icon-md" />, text: "Messages", url: "/admin/messages" },
   { icon: <PiWarehouseBold className="icon-md" />, text: "Mills", url: "/admin/mills" },
   { icon: <BiSolidBookContent className="icon-md" />, text: "Contents", url: "/admin/contents" },
+  { icon: <IoTimer className="icon-md" />, text: "Time Tracker", url: "/admin/time-tracker" },
 ];
 
 const active_text = {
@@ -29,6 +30,7 @@ const active_text = {
   "Trips": "trip",
   "Messages": "message",
   "Mills": "mill",
+  "Time Tracker": "time",
   "Contents": "content",
 };
 

@@ -28,6 +28,9 @@ import Trip from "./trip/Trip";
 import ViewTrip from "./trip/ViewTrip";
 import EditTrip from "./trip/EditTrip";
 
+import TimeTracker from "./logs/TimeTracker";
+import UserTimeTracker from "./logs/UserTimeTracker";
+
 export {
   Dashboard, Profile, AdminLoginScreen,
   Users, ViewUser,
@@ -37,4 +40,5 @@ export {
   Message, ViewMessage,
   Content, AddContent, EditContent,
   Trip, ViewTrip, EditTrip,
+  TimeTracker, UserTimeTracker
 };

@@ -13,6 +13,7 @@ import {
   Message, ViewMessage,
   Content, AddContent, EditContent,
   Trip, ViewTrip,
+  TimeTracker, UserTimeTracker
 } from "./pages";
 
 function App() {
@@ -45,6 +46,8 @@ function App() {
     { path: "/admin/contents", element: <Content /> },
     { path: "/admin/content/create", element: <AddContent /> },
     { path: "/admin/content/edit", element: <EditContent /> },
+    { path: "/admin/time-tracker", element: <TimeTracker /> },
+    { path: "/admin/time-tracker/dId/:id", element: <UserTimeTracker /> },
   ];
 
   return (
