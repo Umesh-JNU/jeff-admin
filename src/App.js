@@ -8,11 +8,11 @@ import {
   AdminLoginScreen, Dashboard, Profile,
   Users, ViewUser,
   Location, ViewLocation, AddLocation,
-  Truck, ViewTruck, AddTruck, 
-  Mill, ViewMill, AddMill, 
+  Truck, ViewTruck, AddTruck,
+  Mill, ViewMill, AddMill,
   Message, ViewMessage,
   Content, AddContent, EditContent,
-  Trip, ViewTrip,
+  Trip, ViewTrip, CalculateFare,
   TimeTracker, UserTimeTracker
 } from "./pages";
 
@@ -41,8 +41,9 @@ function App() {
     { path: "/admin/view/mill/:id", element: <ViewMill /> },
     { path: "/admin/trips", element: <Trip /> },
     { path: "/admin/view/trip/:id", element: <ViewTrip /> },
-    { path: "/admin/messages", element: <Message/> },
-    { path: "/admin/view/message/:id", element: <ViewMessage/> },
+    { path: "/admin/trip/calc-fare", element: <CalculateFare /> },
+    { path: "/admin/messages", element: <Message /> },
+    { path: "/admin/view/message/:id", element: <ViewMessage /> },
     { path: "/admin/contents", element: <Content /> },
     { path: "/admin/content/create", element: <AddContent /> },
     { path: "/admin/content/edit", element: <EditContent /> },

@@ -42,19 +42,18 @@ import MessageBox from "./MessageBox";
 
 const boolComp = (val) => {
   return val ? <FaCheck className="green" /> : <ImCross className="red" />;
-};
+}
 
 const isDate = (date) => {
   return (
-    date instanceof Date &&
-    new Date(date) !== "Invalid Date" &&
-    !isNaN(new Date(date))
-  );
-};
+    (new Date(date) instanceof Date) &&
+    new Date(date) !== "Invalid Date") &&
+    !isNaN(new Date(date));
+}
 
 const dynamicComp = (val) => {
   const dataType = typeof val;
-  // console.log({ dataType })
+  console.log({ dataType })
   switch (dataType) {
     case "number":
       return val;
@@ -148,8 +147,6 @@ export default function ViewCard(props) {
                             <p>
                               {loading ? (
                                 <Skeleton />
-                              ) : dynamicComp(data[attr]) === "CA" ? (
-                                "Canada"
                               ) : (
                                 dynamicComp(data[attr])
                               )}

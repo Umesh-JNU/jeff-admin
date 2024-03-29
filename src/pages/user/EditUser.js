@@ -58,17 +58,17 @@ export default function EditUserModel(props) {
 				required: true,
 			}
 		},
-		{
-			type: "select",
-			col: 12,
-			props: {
-				label: "Role",
-				name: "role",
-				value: 'driver',
-				placeholder: "Select Role",
-				options: [{ 'driver': 'Driver' }, { 'admin': 'Admin' }]
-			}
-		}
+		// {
+		// 	type: "select",
+		// 	col: 12,
+		// 	props: {
+		// 		label: "Role",
+		// 		name: "role",
+		// 		value: 'driver',
+		// 		placeholder: "Select Role",
+		// 		options: [{ 'driver': 'Driver' }, { 'admin': 'Admin' }]
+		// 	}
+		// }
 	];
 
 	const [info, setInfo] = useState(userData);

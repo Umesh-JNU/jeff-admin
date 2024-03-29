@@ -27,6 +27,7 @@ import EditContent from "./content/EditContent";
 import Trip from "./trip/Trip";
 import ViewTrip from "./trip/ViewTrip";
 import EditTrip from "./trip/EditTrip";
+import CalculateFare from "./trip/CalculateFare.js";
 
 import TimeTracker from "./logs/TimeTracker";
 import UserTimeTracker from "./logs/UserTimeTracker";
@@ -39,6 +40,6 @@ export {
   Mill, ViewMill, AddMill,
   Message, ViewMessage,
   Content, AddContent, EditContent,
-  Trip, ViewTrip, EditTrip,
+  Trip, ViewTrip, EditTrip, CalculateFare,
   TimeTracker, UserTimeTracker
 };

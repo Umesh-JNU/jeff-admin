@@ -86,7 +86,7 @@ export default function TimeTracker() {
               <tbody>
 
                 {loading ? (
-                  <CustomSkeleton resultPerPage={10} column={5} />
+                  <CustomSkeleton resultPerPage={10} column={6} />
                 ) : (
                   logs && logs.length > 0 &&
                   logs.map((log, i) => (

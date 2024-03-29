@@ -18,7 +18,8 @@ import reducer from "./state/reducer";
 import { getAll, del } from "./state/action";
 import { toastOptions } from "../../utils/error";
 import { IoMdOpen } from "react-icons/io";
-import { Col, Row } from "react-bootstrap";
+import { MdOutlineCalculate } from "react-icons/md";
+import { Button, Col, Row } from "react-bootstrap";
 
 export default function Trips() {
   const navigate = useNavigate();
@@ -133,11 +134,6 @@ export default function Trips() {
             pageHandler={curPageHandler}
             search={false}
             // searchProps={{ searchInput, setSearchInput, setQuery }}
-            // isCreateBtn="true"
-            // createBtnProps={{
-            //   createURL: "/admin/wholesaler/create",
-            //   text: "Wholesaler"
-            // }}
             isTitle="true"
             title={`${status === 'on-going' ? " On-going Trips" : "Completed Trips"}`}
           >
@@ -159,6 +155,9 @@ export default function Trips() {
                   <td>
                     <ViewButton onClick={() => navigate(`/admin/view/trip/${trip._id}`)} />
                     <DeleteButton onClick={() => deleteTrip(trip._id)} />
+                    <Button onClick={() => navigate(`/admin/trip/calc-fare/?START_MILAGE=${trip.start_milage}&LOAD_MILAGE=${trip.load_milage}&UNLOAD_MILAGE=${trip.unload_milage}&END_MILAGE=${trip.end_milage}`)} type="success" className="ms-2 btn btn-success">
+                      <MdOutlineCalculate />
+                    </Button>
                   </td>
                 </tr>
               ))}

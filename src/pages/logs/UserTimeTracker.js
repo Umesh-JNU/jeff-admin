@@ -111,7 +111,7 @@ export default function UserTimeTracker() {
               <tbody>
 
                 {loading ? (
-                  <CustomSkeleton resultPerPage={10} column={5} />
+                  <CustomSkeleton resultPerPage={10} column={4} />
                 ) : (
                   userLogs && userLogs.length > 0 &&
                   userLogs.map((log, i) => (
