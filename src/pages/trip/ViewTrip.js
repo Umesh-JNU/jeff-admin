@@ -68,6 +68,28 @@ const ViewTrip = () => {
     error: "",
   });
 
+  const getSourceDest = () => {
+    if (trip) {
+      if (trip.unload_depart_time) {
+        return {
+          source: trip.unload_loc.address,
+          dest: trip.end_loc
+        }
+      } else if (trip.unload_loc) {
+        return {
+          source: trip.load_loc,
+          dest: trip.unload_loc.address
+        }
+      }
+      else if (trip.load_loc) {
+        return {
+          source: trip.source_loc,
+          dest: trip.load_loc
+        }
+      }
+    }
+  }
+
   const getTrip = () => {
     return { ...trip, source_loc: trip.source_loc?.name, load_loc: trip.load_loc?.name, unload_loc: trip.unload_loc?.address?.name, end_loc: trip.end_loc?.name };
   };
@@ -89,18 +111,10 @@ const ViewTrip = () => {
       isEdit={false}
       child={
         <>
-          {trip?.status === "on-going" ? (
-            trip.sub_trip ? (
-              <LiveMap
-                source={trip?.sub_trip?.source}
-                dest={trip?.sub_trip?.dest}
-              />
-            ) : (
-              <LiveMap source={trip?.source} dest={trip?.dest} />
-            )
-          ) : (
-            <></>
-          )}
+          {trip?.status === "on-going" ?
+            <LiveMap {...getSourceDest()} />
+            : <></>
+          }
 
           <TripProgress
             data={{
